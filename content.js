@@ -478,10 +478,13 @@ function applyUIEnhancements() {
   }
   
   if (settings['hide-notices']) {
-    // Hide admin notices
+    // Hide admin notices, but not plugin update notices
     const notices = document.querySelectorAll('.notice:not(.notice-success), .error, .updated:not(.notice-success)');
     notices.forEach(notice => {
-      notice.style.display = 'none';
+      // If the notice is inside a plugin update row, don't hide it
+      if (!notice.closest('.plugin-update-tr')) {
+        notice.style.display = 'none';
+      }
     });
   }
   
